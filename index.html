@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Elina & Jahangir Daily Routine (Well Done Stars + Balloons + Music)</title>
+  <style>
+    :root{
+      --bg1:#fff7e6;
+      --bg2:#e6f7ff;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --ok:#16a34a;
+      --accent:#7c3aed;
+      --shadow: 0 10px 25px rgba(0,0,0,.08);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 20% 10%, var(--bg2), transparent 50%),
+                  radial-gradient(1200px 800px at 80% 0%, var(--bg1), transparent 55%),
+                  linear-gradient(180deg, #f8fafc, #ffffff);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    header{ padding: 26px 16px 10px; text-align:center; }
+    h1{ margin:0 0 6px; font-size: clamp(22px, 3vw, 32px); letter-spacing:.2px; }
+    .sub{ margin:0; color:var(--muted); font-size: 14px; }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px;
+      display:grid;
+      gap:16px;
+    }
+
+    .toolbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      align-items:center;
+      padding: 10px 12px;
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+    }
+
+    .pill{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(0,0,0,.12);
+      background:white;
+    }
+    select{
+      border:0;
+      outline:none;
+      font-weight:800;
+      background:transparent;
+      cursor:pointer;
+      color:#111827;
+    }
+
+    .btn{
+      border:0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor:pointer;
+      background: #111827;
+      color:white;
+      transition: transform .05s ease, opacity .15s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:active{transform: scale(.98)}
+    .btn.secondary{ background: white; color:#111827; border:1px solid rgba(0,0,0,.12); }
+    .btn.purple{ background: var(--accent); }
+    .btn.green{ background: var(--ok); }
+    .btn:disabled{ opacity:.55; cursor:not-allowed; }
+
+    .grid{ display:grid; grid-template-columns: 1fr; gap:16px; }
+    @media (min-width: 860px){ .grid{ grid-template-columns: 1fr 1fr; } }
+
+    .card{
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card h2{
+      margin: 2px 0 6px;
+      font-size: 20px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .badge{
+      font-size: 12px;
+      color:#111827;
+      background: rgba(124,58,237,.12);
+      border: 1px solid rgba(124,58,237,.22);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .progress{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:var(--muted);
+      font-size: 13px;
+      margin: 8px 0 14px;
+    }
+    .bar{
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.08);
+      overflow:hidden;
+      flex:1;
+      margin-left: 10px;
+    }
+    .bar > div{
+      height:100%;
+      width: 0%;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      border-radius: 999px;
+      transition: width .25s ease;
+    }
+
+    .list{ display:grid; gap:10px; margin:0; padding:0; list-style:none; }
+
+    .item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.9);
+    }
+    .left{ display:flex; align-items:center; gap:10px; min-width:0; }
+    .icon{
+      width: 36px; height: 36px;
+      border-radius: 12px;
+      display:grid; place-items:center;
+      font-size: 18px;
+      background: rgba(0,0,0,.06);
+      flex: 0 0 auto;
+    }
+    .label{
+      font-weight: 800;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .done .label{
+      color: var(--ok);
+      text-decoration: line-through;
+      text-decoration-thickness: 2px;
+      text-decoration-color: rgba(22,163,74,.5);
+    }
+
+    .right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex: 0 0 auto;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .tick{
+      width: 26px; height: 26px;
+      border-radius: 10px;
+      border: 2px solid rgba(0,0,0,.16);
+      display:grid; place-items:center;
+      font-size: 16px;
+      background:white;
+    }
+    .done .tick{
+      border-color: rgba(22,163,74,.5);
+      background: rgba(22,163,74,.12);
+    }
+
+    .timerText{
+      font-weight: 900;
+      font-size: 13px;
+      color:#111827;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.9);
+      min-width: 74px;
+      text-align:center;
+    }
+    .timerText.running{ border-color: rgba(124,58,237,.35); background: rgba(124,58,237,.08); }
+    .timerText.done{ border-color: rgba(22,163,74,.35); background: rgba(22,163,74,.10); color: var(--ok); }
+
+    .footerNote{ text-align:center; color: var(--muted); font-size: 12px; margin-top: -4px; }
+
+    /* Balloons */
+    .balloon{
+      position: fixed;
+      bottom: -60px;
+      width: 34px;
+      height: 44px;
+      border-radius: 50% 50% 48% 48%;
+      box-shadow: 0 10px 25px rgba(0,0,0,.15);
+      opacity: .95;
+      z-index: 9999;
+      animation: floatUp linear forwards;
+    }
+    .balloon::after{
+      content:"";
+      position:absolute;
+      left: 50%;
+      bottom: -16px;
+      width: 2px;
+      height: 16px;
+      background: rgba(0,0,0,.25);
+      transform: translateX(-50%);
+    }
+    @keyframes floatUp{
+      to{ transform: translateY(-110vh) translateX(var(--drift)); opacity: 0.15; }
+    }
+
+    /* Confetti */
+    .confetti{
+      position: fixed;
+      top: -10px;
+      width: 10px;
+      height: 14px;
+      border-radius: 2px;
+      z-index: 9999;
+      opacity: .95;
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall{
+      to{ transform: translateY(110vh) rotate(720deg); opacity: 0.25; }
+    }
+
+    /* Stars */
+    .star{
+      position: fixed;
+      top: -20px;
+      width: 14px;
+      height: 14px;
+      z-index: 9999;
+      animation: starFall linear forwards;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.2));
+      opacity: .95;
+    }
+    .star::before{
+      content:"⭐";
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      font-size: 18px;
+    }
+    @keyframes starFall{
+      to{
+        transform: translateY(110vh) rotate(360deg);
+        opacity: .2;
+      }
+    }
+
+    /* WELL DONE overlay */
+    .overlay{
+      position: fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 10000;
+      background: rgba(17,24,39,.25);
+      backdrop-filter: blur(8px);
+      padding: 18px;
+    }
+    .overlay.show{ display:flex; }
+
+    .overlayCard{
+      width: min(520px, 92vw);
+      border-radius: 22px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(0,0,0,.10);
+      box-shadow: 0 18px 60px rgba(0,0,0,.25);
+      padding: 18px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .bigTitle{
+      margin: 8px 0 6px;
+      font-size: 34px;
+      letter-spacing:.2px;
+    }
+    .kidName{
+      font-size: 18px;
+      font-weight: 900;
+      margin: 0 0 10px;
+      color: #111827;
+    }
+    .rewardRow{
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      font-size: 28px;
+      margin: 10px 0 6px;
+    }
+    .overlaySub{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-weight: 650;
+    }
+    .overlayBtns{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      margin-top: 10px;
+    }
+    .sparkle{
+      position:absolute;
+      inset:-40px;
+      background: radial-gradient(circle at 20% 10%, rgba(124,58,237,.20), transparent 45%),
+                  radial-gradient(circle at 80% 30%, rgba(34,197,94,.18), transparent 45%),
+                  radial-gradient(circle at 50% 90%, rgba(255,193,7,.20), transparent 45%);
+      pointer-events:none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Elina & Jahangir Daily Routine</h1>
+    <p class="sub">Timers have tick-tock sound. Finish Morning + Night to get a big “Well Done!”</p>
+  </header>
+
+  <div class="wrap">
+    <div class="toolbar">
+      <div class="pill">
+        <span>👧👦 Kid:</span>
+        <select id="kidSelect" aria-label="Select kid">
+          <option value="Elina">Elina</option>
+          <option value="Jahangir">Jahangir</option>
+        </select>
+      </div>
+
+      <button class="btn purple" id="musicBtn">🎵 Play Happy Music</button>
+      <button class="btn secondary" id="stopMusicBtn" disabled>⏸️ Stop Music</button>
+
+      <button class="btn secondary" id="toggleTickBtn">🔔 Tick: ON</button>
+
+      <button class="btn secondary" id="resetKidBtn">🔄 Reset This Kid</button>
+      <button class="btn secondary" id="resetAllBtn">🧹 Reset Both Kids</button>
+
+      <span class="sub" id="todayLabel"></span>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>🌞 Morning <span class="badge" id="morningBadge">0/0</span></h2>
+        <div class="progress">
+          <span id="morningProgressText">0 done</span>
+          <div class="bar"><div id="morningBar"></div></div>
+        </div>
+        <ul class="list" id="morningList"></ul>
+      </section>
+
+      <section class="card">
+        <h2>🌙 Nighttime <span class="badge" id="nightBadge">0/0</span></h2>
+        <div class="progress">
+          <span id="nightProgressText">0 done</span>
+          <div class="bar"><div id="nightBar"></div></div>
+        </div>
+        <ul class="list" id="nightList"></ul>
+      </section>
+    </div>
+
+    <div class="footerNote">Progress saves automatically for today ✨</div>
+  </div>
+
+  <!-- WELL DONE overlay -->
+  <div class="overlay" id="wellDoneOverlay" role="dialog" aria-modal="true">
+    <div class="overlayCard">
+      <div class="sparkle"></div>
+      <div class="rewardRow">🎈 ⭐ 🎉 ⭐ 🎈</div>
+      <div class="bigTitle">Well Done!</div>
+      <div class="kidName" id="wellDoneKid">Elina</div>
+      <p class="overlaySub">You finished Morning and Nighttime routines!</p>
+      <div class="overlayBtns">
+        <button class="btn green" id="overlayMoreBtn">⭐ More Stars!</button>
+        <button class="btn purple" id="overlayMusicBtn">🎶 Celebration Music</button>
+        <button class="btn secondary" id="overlayCloseBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===============================
+    // 1) SETTINGS (seconds)
+    // ===============================
+    const DEFAULT_TIMES = {
+      milk: 400,     // 0:30
+      bath: 300,     // 1:30
+      teeth: 500,   // 2:00
+      book: 600,    // 10:00
+      gn: 300        // 0:10
+    };
+
+    // Tick-tock + music volumes
+    let TICK_ENABLED = true;
+    const TICK_VOLUME = 0.018;
+    const MUSIC_VOLUME = 0.040;
+
+    // ===============================
+    // 2) Kids + routines
+    // ===============================
+    const kidSelect = document.getElementById("kidSelect");
+    const routines = {
+      morning: [
+        { id: "milk",  label: "Drink milk",     icon: "🥛", time: DEFAULT_TIMES.milk },
+        { id: "bath",  label: "Use bathroom",   icon: "🚽", time: DEFAULT_TIMES.bath },
+        { id: "teeth", label: "Brush teeth",    icon: "🪥", time: DEFAULT_TIMES.teeth },
+        { id: "book",  label: "Read a book",    icon: "📚", time: DEFAULT_TIMES.book },
+      ],
+      night: [
+        { id: "bath",  label: "Use bathroom",   icon: "🚽", time: DEFAULT_TIMES.bath },
+        { id: "teeth", label: "Brush teeth",    icon: "🪥", time: DEFAULT_TIMES.teeth },
+        { id: "milk",  label: "Drink milk",     icon: "🥛", time: DEFAULT_TIMES.milk },
+        { id: "book",  label: "Read a book",    icon: "📖", time: DEFAULT_TIMES.book },
+        { id: "gn",    label: "Say good night", icon: "😴", time: DEFAULT_TIMES.gn },
+      ],
+    };
+
+    // ===============================
+    // 3) Storage
+    // ===============================
+    const todayKey = () => {
+      const d = new Date();
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth()+1).padStart(2,"0");
+      const dd = String(d.getDate()).padStart(2,"0");
+      return `kids_routine_${yyyy}-${mm}-${dd}`;
+    };
+
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(todayKey());
+        if(!raw) return { Elina: {}, Jahangir: {} };
+        const parsed = JSON.parse(raw);
+        return { Elina: parsed.Elina || {}, Jahangir: parsed.Jahangir || {} };
+      }catch{
+        return { Elina: {}, Jahangir: {} };
+      }
+    }
+    function saveState(allKidsData){
+      localStorage.setItem(todayKey(), JSON.stringify(allKidsData));
+    }
+
+    let allData = loadState();
+    let currentKid = kidSelect.value;
+
+    const keyDone = (section, taskId) => `${section}_${taskId}_done`;
+    const keyRem  = (section, taskId) => `${section}_${taskId}_rem`;
+    const keyRun  = (section, taskId) => `${section}_${taskId}_run`;
+    const keyRewardShown = () => `reward_shown`; // per kid/day
+
+    function getKidStore(){ return allData[currentKid] || (allData[currentKid] = {}); }
+
+    function isDone(section, taskId){ return !!getKidStore()[keyDone(section, taskId)]; }
+    function setDone(section, taskId, value){
+      getKidStore()[keyDone(section, taskId)] = !!value;
+      if(value){
+        stopTimer(section, taskId);
+        getKidStore()[keyRun(section, taskId)] = false;
+      }
+      saveState(allData);
+    }
+
+    function getRemaining(section, taskId, defaultSeconds){
+      const store = getKidStore();
+      const rem = store[keyRem(section, taskId)];
+      return (typeof rem === "number" && rem >= 0) ? rem : defaultSeconds;
+    }
+    function setRemaining(section, taskId, seconds){
+      getKidStore()[keyRem(section, taskId)] = seconds;
+      saveState(allData);
+    }
+
+    function isRunning(section, taskId){ return !!getKidStore()[keyRun(section, taskId)]; }
+    function setRunning(section, taskId, value){
+      getKidStore()[keyRun(section, taskId)] = !!value;
+      saveState(allData);
+    }
+
+    // ===============================
+    // 4) UI refs
+    // ===============================
+    const todayLabel = document.getElementById("todayLabel");
+    todayLabel.textContent = new Date().toLocaleDateString(undefined, { weekday:"long", month:"long", day:"numeric", year:"numeric" });
+
+    const morningList = document.getElementById("morningList");
+    const nightList   = document.getElementById("nightList");
+
+    const toggleTickBtn = document.getElementById("toggleTickBtn");
+    toggleTickBtn.addEventListener("click", () => {
+      TICK_ENABLED = !TICK_ENABLED;
+      toggleTickBtn.textContent = TICK_ENABLED ? "🔔 Tick: ON" : "🔕 Tick: OFF";
+    });
+
+    // Active timers
+    const activeIntervals = new Map(); // intervalKey -> intervalId
+
+    // ===============================
+    // 5) Audio (shared WebAudio)
+    // ===============================
+    let audioCtx = null;
+    let masterGain = null;
+
+    function ensureAudio(){
+      if(audioCtx) return;
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioCtx();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = 0.85;
+      masterGain.connect(audioCtx.destination);
+    }
+
+    function beep(freq=660, duration=0.10, type="sine", gain=0.06){
+      ensureAudio();
+      if(audioCtx.state === "suspended") audioCtx.resume();
+
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = type;
+      o.frequency.value = freq;
+
+      const now = audioCtx.currentTime;
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.exponentialRampToValueAtTime(gain, now + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+      o.connect(g);
+      g.connect(masterGain);
+      o.start(now);
+      o.stop(now + duration + 0.02);
+    }
+
+    function playDing(){
+      beep(880, 0.08, "sine", 0.06);
+      setTimeout(()=>beep(1320, 0.10, "sine", 0.05), 80);
+    }
+
+    function playWinMelody(){
+      const notes = [523, 659, 784, 1046, 784, 1046];
+      notes.forEach((n,i)=> setTimeout(()=>beep(n, 0.12, "triangle", 0.055), i*130));
+    }
+
+    function playTickTock(stepNumber){
+      if(!TICK_ENABLED) return;
+      const tick = (stepNumber % 2 === 0);
+      const freq = tick ? 1200 : 900;
+      beep(freq, 0.03, "square", TICK_VOLUME);
+    }
+
+    // ===============================
+    // 6) Longer happy music (loop)
+    // ===============================
+    let musicTimer = null;
+    let musicStep = 0;
+    let musicPlaying = false;
+
+    const HAPPY_MELODY = [
+      523,659,784,659, 523,659,784,880,
+      784,659,587,659, 523,0,  523,0,
+      659,784,880,784, 659,784,880,988,
+      880,784,659,587, 523,0,  523,0,
+      587,659,784,659, 587,659,784,880,
+      988,880,784,659, 587,0,  587,0
+    ];
+
+    function musicNote(freq){
+      if(!freq) return;
+      beep(freq, 0.14, "sine", MUSIC_VOLUME);
+      if(musicStep % 4 === 0) beep(freq*2, 0.07, "triangle", MUSIC_VOLUME * 0.35);
+    }
+
+    function startHappyMusic(){
+      ensureAudio();
+      if(audioCtx.state === "suspended") audioCtx.resume();
+      if(musicPlaying) return;
+      musicPlaying = true;
+      musicStep = 0;
+
+      const stepMs = 190;
+      musicTimer = setInterval(() => {
+        const freq = HAPPY_MELODY[musicStep % HAPPY_MELODY.length];
+        musicNote(freq);
+        musicStep++;
+      }, stepMs);
+    }
+
+    function stopHappyMusic(){
+      musicPlaying = false;
+      clearInterval(musicTimer);
+      musicTimer = null;
+    }
+
+    const musicBtn = document.getElementById("musicBtn");
+    const stopMusicBtn = document.getElementById("stopMusicBtn");
+
+    musicBtn.addEventListener("click", () => {
+      startHappyMusic();
+      musicBtn.textContent = "🎵 Music Playing";
+      musicBtn.disabled = true;
+      stopMusicBtn.disabled = false;
+    });
+    stopMusicBtn.addEventListener("click", () => {
+      stopHappyMusic();
+      musicBtn.textContent = "🎵 Play Happy Music";
+      musicBtn.disabled = false;
+      stopMusicBtn.disabled = true;
+    });
+
+    // ===============================
+    // 7) Stars + Balloons + Confetti
+    // ===============================
+    function rand(min, max){ return Math.random() * (max-min) + min; }
+
+    function popBalloons(count=10){
+      for(let i=0;i<count;i++){
+        const b = document.createElement("div");
+        b.className = "balloon";
+        b.style.left = rand(0, 100) + "vw";
+        b.style.background = `hsl(${Math.floor(rand(0,360))} 85% 65%)`;
+        b.style.setProperty("--drift", rand(-40, 40) + "px");
+        const dur = rand(3.5, 6.5);
+        b.style.animationDuration = dur + "s";
+        document.body.appendChild(b);
+        setTimeout(()=>b.remove(), dur*1000);
+      }
+    }
+
+    function confetti(count=30){
+      for(let i=0;i<count;i++){
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = rand(0, 100) + "vw";
+        c.style.background = `hsl(${Math.floor(rand(0,360))} 90% 60%)`;
+        c.style.transform = `rotate(${rand(0,360)}deg)`;
+        const dur = rand(2.5, 4.5);
+        c.style.animationDuration = dur + "s";
+        c.style.animationDelay = rand(0, 0.4) + "s";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(), (dur+0.5)*1000);
+      }
+    }
+
+    function stars(count=40){
+      for(let i=0;i<count;i++){
+        const s = document.createElement("div");
+        s.className = "star";
+        s.style.left = rand(0, 100) + "vw";
+        const dur = rand(2.8, 5.0);
+        s.style.animationDuration = dur + "s";
+        s.style.animationDelay = rand(0, 0.5) + "s";
+        // small variety in size
+        const scale = rand(0.8, 1.4);
+        s.style.transform = `scale(${scale})`;
+        document.body.appendChild(s);
+        setTimeout(()=>s.remove(), (dur+0.8)*1000);
+      }
+    }
+
+    // ===============================
+    // 8) WELL DONE overlay
+    // ===============================
+    const overlay = document.getElementById("wellDoneOverlay");
+    const wellDoneKid = document.getElementById("wellDoneKid");
+
+    function showWellDone(){
+      // only show once per kid per day unless reset
+      const store = getKidStore();
+      if(store[keyRewardShown()]) return;
+
+      store[keyRewardShown()] = true;
+      saveState(allData);
+
+      wellDoneKid.textContent = currentKid;
+      overlay.classList.add("show");
+
+      // big celebration
+      popBalloons(30);
+      confetti(80);
+      stars(70);
+      playWinMelody();
+
+      // start music automatically for celebration (if not already)
+      startHappyMusic();
+      musicBtn.textContent = "🎵 Music Playing";
+      musicBtn.disabled = true;
+      stopMusicBtn.disabled = false;
+    }
+
+    function closeWellDone(){
+      overlay.classList.remove("show");
+    }
+
+    document.getElementById("overlayCloseBtn").addEventListener("click", closeWellDone);
+    overlay.addEventListener("click", (e) => {
+      if(e.target === overlay) closeWellDone();
+    });
+
+    document.getElementById("overlayMoreBtn").addEventListener("click", () => {
+      popBalloons(18);
+      confetti(50);
+      stars(60);
+      playWinMelody();
+    });
+
+    document.getElementById("overlayMusicBtn").addEventListener("click", () => {
+      startHappyMusic();
+      popBalloons(10);
+      stars(25);
+    });
+
+    // ===============================
+    // 9) Timer + routine logic
+    // ===============================
+    function sectionCompleted(section){
+      return routines[section].every(t => isDone(section, t.id));
+    }
+
+    function allCompleted(){
+      return sectionCompleted("morning") && sectionCompleted("night");
+    }
+
+    function formatTime(seconds){
+      const s = Math.max(0, Math.floor(seconds));
+      const m = Math.floor(s / 60);
+      const r = s % 60;
+      return `${m}:${String(r).padStart(2,"0")}`;
+    }
+
+    function checkForBigReward(){
+      if(allCompleted()) showWellDone();
+    }
+
+    function toggleDone(section, taskId){
+      const now = !isDone(section, taskId);
+      setDone(section, taskId, now);
+
+      if(now){
+        playDing();
+        popBalloons(6);
+      }
+
+      render();
+
+      // small celebration per section
+      if(sectionCompleted(section)){
+        popBalloons(16);
+        confetti(35);
+        stars(20);
+        playWinMelody();
+      }
+
+      // BIG reward when both sections done
+      checkForBigReward();
+    }
+
+    function startTimer(section, task){
+      if(isDone(section, task.id)) return;
+
+      stopTimer(section, task.id);
+
+      const intervalKey = `${currentKid}_${section}_${task.id}`;
+      setRunning(section, task.id, true);
+
+      let remaining = getRemaining(section, task.id, task.time);
+      setRemaining(section, task.id, remaining);
+
+      popBalloons(3);
+
+      let localStep = 0;
+
+      const tick = () => {
+        if(intervalKey !== `${currentKid}_${section}_${task.id}`){
+          stopTimer(section, task.id);
+          render();
+          return;
+        }
+        if(!isRunning(section, task.id)){
+          stopTimer(section, task.id);
+          render();
+          return;
+        }
+
+        remaining = getRemaining(section, task.id, task.time);
+
+        if(remaining > 0) playTickTock(localStep++);
+
+        if(remaining <= 0){
+          setRemaining(section, task.id, 0);
+          setRunning(section, task.id, false);
+          setDone(section, task.id, true);
+
+          // finish celebration
+          popBalloons(14);
+          confetti(32);
+          stars(20);
+          playWinMelody();
+
+          render();
+
+          // section done?
+          if(sectionCompleted(section)){
+            popBalloons(18);
+            confetti(40);
+            stars(30);
+            playWinMelody();
+          }
+
+          checkForBigReward();
+          return;
+        }
+
+        remaining -= 1;
+        setRemaining(section, task.id, remaining);
+        render();
+      };
+
+      const id = setInterval(tick, 1000);
+      activeIntervals.set(intervalKey, id);
+      render();
+    }
+
+    function pauseTimer(section, taskId){
+      setRunning(section, taskId, false);
+      stopTimer(section, taskId);
+      render();
+    }
+
+    function resetTimer(section, task){
+      pauseTimer(section, task.id);
+      setRemaining(section, task.id, task.time);
+      render();
+    }
+
+    function stopTimer(section, taskId){
+      const intervalKey = `${currentKid}_${section}_${taskId}`;
+      const id = activeIntervals.get(intervalKey);
+      if(id){
+        clearInterval(id);
+        activeIntervals.delete(intervalKey);
+      }
+    }
+
+    // ===============================
+    // 10) Render
+    // ===============================
+    function makeItem(section, task){
+      const li = document.createElement("li");
+      li.className = "item";
+      if(isDone(section, task.id)) li.classList.add("done");
+
+      const left = document.createElement("div");
+      left.className = "left";
+
+      const icon = document.createElement("div");
+      icon.className = "icon";
+      icon.textContent = task.icon;
+
+      const label = document.createElement("div");
+      label.className = "label";
+      label.textContent = task.label;
+
+      left.appendChild(icon);
+      left.appendChild(label);
+
+      const right = document.createElement("div");
+      right.className = "right";
+
+      const tickBox = document.createElement("div");
+      tickBox.className = "tick";
+      tickBox.textContent = isDone(section, task.id) ? "✓" : "";
+
+      const doneBtn = document.createElement("button");
+      doneBtn.className = "btn green";
+      doneBtn.textContent = isDone(section, task.id) ? "Undo" : "Done ✅";
+      doneBtn.addEventListener("click", () => toggleDone(section, task.id));
+
+      const timerText = document.createElement("div");
+      timerText.className = "timerText";
+      const rem = getRemaining(section, task.id, task.time);
+
+      if(isDone(section, task.id)){
+        timerText.classList.add("done");
+        timerText.textContent = "✔ Done";
+      } else {
+        timerText.textContent = formatTime(rem);
+        if(isRunning(section, task.id)) timerText.classList.add("running");
+      }
+
+      const startBtn = document.createElement("button");
+      startBtn.className = "btn secondary";
+      startBtn.textContent = isRunning(section, task.id) ? "⏸ Pause" : "⏱ Start";
+      startBtn.addEventListener("click", () => {
+        if(isRunning(section, task.id)) pauseTimer(section, task.id);
+        else startTimer(section, task);
+      });
+
+      const resetBtn = document.createElement("button");
+      resetBtn.className = "btn secondary";
+      resetBtn.textContent = "↩ Reset";
+      resetBtn.addEventListener("click", () => resetTimer(section, task));
+
+      if(isDone(section, task.id)){
+        startBtn.disabled = true;
+        resetBtn.disabled = true;
+      }
+
+      right.appendChild(tickBox);
+      right.appendChild(doneBtn);
+      right.appendChild(startBtn);
+      right.appendChild(resetBtn);
+      right.appendChild(timerText);
+
+      li.appendChild(left);
+      li.appendChild(right);
+      return li;
+    }
+
+    function updateProgress(section){
+      const tasks = routines[section];
+      const doneCount = tasks.filter(t => isDone(section, t.id)).length;
+      const total = tasks.length;
+      const pct = total ? Math.round((doneCount/total)*100) : 0;
+
+      document.getElementById(section+"Badge").textContent = `${doneCount}/${total}`;
+      document.getElementById(section+"Bar").style.width = pct + "%";
+      document.getElementById(section+"ProgressText").textContent = `${doneCount} done`;
+    }
+
+    function render(){
+      morningList.innerHTML = "";
+      nightList.innerHTML = "";
+      routines.morning.forEach(t => morningList.appendChild(makeItem("morning", t)));
+      routines.night.forEach(t => nightList.appendChild(makeItem("night", t)));
+      updateProgress("morning");
+      updateProgress("night");
+    }
+
+    // ===============================
+    // 11) Reset + switching kids
+    // ===============================
+    function clearAllIntervals(){
+      for(const [k, id] of activeIntervals.entries()) clearInterval(id);
+      activeIntervals.clear();
+    }
+
+    kidSelect.addEventListener("change", () => {
+      clearAllIntervals();
+      currentKid = kidSelect.value;
+      popBalloons(8);
+      stars(12);
+      render();
+      // if already completed, show overlay if not shown yet
+      checkForBigReward();
+    });
+
+    document.getElementById("resetKidBtn").addEventListener("click", () => {
+      clearAllIntervals();
+      allData[currentKid] = {}; // clears reward_shown too
+      saveState(allData);
+      confetti(20);
+      render();
+      closeWellDone();
+    });
+
+    document.getElementById("resetAllBtn").addEventListener("click", () => {
+      clearAllIntervals();
+      allData = { Elina: {}, Jahangir: {} };
+      saveState(allData);
+      confetti(30);
+      render();
+      closeWellDone();
+    });
+
+    // ===============================
+    // 12) Start
+    // ===============================
+    render();
+    // if already completed, show overlay (only if not shown)
+    checkForBigReward();
+  </script>
+</body>
+</html>
